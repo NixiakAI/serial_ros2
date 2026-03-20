@@ -1,36 +1,17 @@
-/* Copyright 2012 William Woodall and John Harrison
- *
- * Additional Contributors: Christopher Baker @bakercp
- */
-
-#if !defined(_WIN32)
-
 #include <stdio.h>
 #include <string.h>
 #include <sstream>
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/ioctl.h>
-#include <sys/signal.h>
+#include <signal.h>
 #include <errno.h>
-#include <paths.h>
-#include <sysexits.h>
 #include <termios.h>
-#include <sys/param.h>
-#include <pthread.h>
-
-#if defined(__linux__)
-# include <linux/serial.h>
-#endif
-
 #include <sys/select.h>
 #include <sys/time.h>
 #include <time.h>
-#ifdef __MACH__
-#include <AvailabilityMacros.h>
-#include <mach/clock.h>
-#include <mach/mach.h>
-#endif
+#include <pthread.h>
+#include <linux/serial.h>
 
 #include "serial/impl/unix.h"
 
@@ -40,10 +21,6 @@
 #else
 #define TIOCINQ 0x541B
 #endif
-#endif
-
-#if defined(MAC_OS_X_VERSION_10_3) && (MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_3)
-#include <IOKit/serial/ioss.h>
 #endif
 
 using std::string;
